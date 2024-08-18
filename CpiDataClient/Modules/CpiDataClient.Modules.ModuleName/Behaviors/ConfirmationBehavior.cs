@@ -1,12 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using DevExpress.Xpf.Diagram.Native;
 using Microsoft.Xaml.Behaviors;
 
 namespace CpiDataClient.Modules.Skus.Behaviors;
 
-public class ConfirmationBehavior: Behavior<Button>
+public class ConfirmationBehavior(IMessageBoxService messageBoxService) : Behavior<Button>
 {
     public static readonly DependencyProperty CommandProperty =
         DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(ConfirmationBehavior), new PropertyMetadata(null));
@@ -58,9 +57,13 @@ public class ConfirmationBehavior: Behavior<Button>
         AssociatedObject.Click -= OnButtonClick;
     }
 
+    public ConfirmationBehavior() : this(new MessageBoxService())
+    {
+    }
+
     private void OnButtonClick(object sender, RoutedEventArgs e)
     {
-        var result = MessageBox.Show(ConfirmationMessage, "Confirmation", MessageBoxButton);
+        var result = messageBoxService.Show(ConfirmationMessage, "Confirmation", MessageBoxButton);
 
         if ((result == MessageBoxResult.Yes || result == MessageBoxResult.OK) && Command?.CanExecute(CommandParameter) == true)
         {
