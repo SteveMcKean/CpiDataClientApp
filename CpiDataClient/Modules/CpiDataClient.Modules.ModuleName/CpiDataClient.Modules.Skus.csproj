@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Wpf" Version="24.1.4" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CpiDataClient.Data\CpiDataClient.Data.csproj" />
+    <ProjectReference Include="..\..\CpiDataClient.Core\CpiDataClient.Core.csproj" />
+    <ProjectReference Include="..\..\Services\CpiDataClient.Services.Interfaces\CpiDataClient.Services.Interfaces.csproj" />
+  </ItemGroup>
+</Project>

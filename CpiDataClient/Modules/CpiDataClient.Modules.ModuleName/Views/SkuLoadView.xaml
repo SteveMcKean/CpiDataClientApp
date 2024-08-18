@@ -1,0 +1,77 @@
+﻿<UserControl
+    x:Class="CpiDataClient.Modules.Skus.Views.SkuLoadView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:local="clr-namespace:CpiDataClient.Modules.ModuleName.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontSize="18"
+    mc:Ignorable="d">
+
+    <Grid Margin="3">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <dxg:GridControl
+            x:Name="GridControl"
+            Grid.Row="0"
+            ItemsSource="{Binding Path=Skus}"
+            SelectedItem="{Binding SelectedSku, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+            <dxg:GridControl.View>
+                <dxg:TableView
+                    AllowEditing="False"
+                    AllowPaging="True"
+                    PageSize="50" />
+            </dxg:GridControl.View>
+
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Width="auto" FieldName="Sku1" />
+                <dxg:GridColumn FieldName="Description" />
+                <dxg:GridColumn FieldName="IsTaught" />
+                <dxg:GridColumn FieldName="CreatedDate" />
+                <dxg:GridColumn FieldName="ModifiedDate" />
+                <dxg:GridColumn FieldName="ModifiedBy" />
+
+            </dxg:GridControl.Columns>
+
+        </dxg:GridControl>
+
+        <dxg:GridControl Grid.Row="1" ItemsSource="{Binding SelectedSku.InboundDimensionalVariants}">
+            <dxg:GridControl.View>
+                <dxg:TableView
+                    AllowGrouping="False"
+                    EditFormPostMode="Immediate"
+                    EditFormShowMode="Dialog"
+                    NewItemRowPosition="Top"
+                    ShowGroupPanel="False" />
+            </dxg:GridControl.View>
+
+            <dxg:GridColumn FieldName="RecordNumber" />
+            <dxg:GridColumn
+                Width="auto"
+                FieldName="SkuId"
+                Visible="False" />
+            <dxg:GridColumn FieldName="IsStorageEligible" />
+            <dxg:GridColumn FieldName="Length" />
+            <dxg:GridColumn FieldName="Width" />
+            <dxg:GridColumn FieldName="Height" />
+            <dxg:GridColumn FieldName="Weight" />
+            <dxg:GridColumn FieldName="TipOverridden" />
+            <dxg:GridColumn FieldName="TipOverrideUserName" />
+            <dxg:GridColumn
+                Width="auto"
+                FieldName="TipOverrideReassonCode"
+                Header="Reason Code" />
+
+        </dxg:GridControl>
+    </Grid>
+</UserControl>
