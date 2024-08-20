@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using CpiDataClient.Modules.Skus.Behaviors;
 using Microsoft.Xaml.Behaviors;
@@ -36,7 +37,7 @@ public class ConfirmationBehaviorTests
                 Interaction.GetBehaviors(button).Add(behavior);
 
                 // Act
-                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 
                 // Assert
                 command.Received(1).Execute(Arg.Any<object>());
@@ -68,7 +69,7 @@ public class ConfirmationBehaviorTests
                 Interaction.GetBehaviors(button).Add(behavior);
 
                 // Act
-                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 
                 // Assert
                 command.DidNotReceive().Execute(Arg.Any<object>());
@@ -102,7 +103,7 @@ public class ConfirmationBehaviorTests
             Interaction.GetBehaviors(button).Add(behavior);
 
             // Act
-            button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
 
             // Assert
             command.DidNotReceive().Execute(Arg.Any<object>());
